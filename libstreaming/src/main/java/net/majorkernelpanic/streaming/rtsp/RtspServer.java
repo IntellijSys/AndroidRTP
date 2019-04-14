@@ -86,12 +86,12 @@ public class RtspServer extends Service {
 	protected SharedPreferences mSharedPreferences;
 	protected boolean mEnabled = true;	
 	protected int mPort = DEFAULT_RTSP_PORT;
-	protected WeakHashMap<Session,Object> mSessions = new WeakHashMap<Session,Object>(2);
+	protected WeakHashMap<Session,Object> mSessions = new WeakHashMap<>(2);
 	
 	private RequestListener mListenerThread;
 	private final IBinder mBinder = new LocalBinder();
 	private boolean mRestart = false;
-	private final LinkedList<CallbackListener> mListeners = new LinkedList<CallbackListener>();
+	private final LinkedList<CallbackListener> mListeners = new LinkedList<>();
 
     /** Credentials for Basic Auth */
     private String mUsername;
@@ -505,7 +505,7 @@ public class RtspServer extends Service {
                         return response;
                     }
 
-                    p = Pattern.compile("client_port=(\\d+)-(\\d+)", Pattern.CASE_INSENSITIVE);
+                    p = Pattern.compile("client_port=(\\d+)(?:-(\\d+))?", Pattern.CASE_INSENSITIVE);
                     m = p.matcher(request.headers.get("transport"));
 
                     if (!m.find()) {
@@ -514,7 +514,11 @@ public class RtspServer extends Service {
                         p2 = ports[1];
                     } else {
                         p1 = Integer.parseInt(m.group(1));
-                        p2 = Integer.parseInt(m.group(2));
+                        if (m.group(2) == null) {
+                            p2 = p1+1;
+                        } else {
+                            p2 = Integer.parseInt(m.group(2));
+                        }
                     }
 
                     ssrc = mSession.getTrack(trackId).getSSRC();
@@ -621,7 +625,7 @@ public class RtspServer extends Service {
 
 		public String method;
 		public String uri;
-		public HashMap<String,String> headers = new HashMap<String,String>();
+		public HashMap<String,String> headers = new HashMap<>();
 
 		/** Parse the method, uri & headers of a RTSP request */
 		public static Request parseRequest(BufferedReader input) throws IOException, IllegalStateException, SocketException {

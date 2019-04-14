@@ -7,13 +7,11 @@ The following files were *not* copied into the new Gradle project; you
 should evaluate whether these are still needed in your project and if
 so manually move them:
 
-* .DS_Store
 * .gitignore
 * LICENSE
 * README.md
 * build.xml
 * doc/
-* doc/.DS_Store
 * doc/allclasses-frame.html
 * doc/allclasses-noframe.html
 * doc/constant-values.html
@@ -22,9 +20,7 @@ so manually move them:
 * doc/index-all.html
 * doc/index.html
 * doc/net/
-* doc/net/.DS_Store
 * doc/net/majorkernelpanic/
-* doc/net/majorkernelpanic/.DS_Store
 * doc/net/majorkernelpanic/streaming/
 * doc/net/majorkernelpanic/streaming/MediaStream.html
 * doc/net/majorkernelpanic/streaming/Session.Callback.html
@@ -129,9 +125,6 @@ Eclipse projects. Here's how the projects were restructured:
 * AndroidManifest.xml => libstreaming/src/main/AndroidManifest.xml
 * res/ => libstreaming/src/main/res/
 * src/ => libstreaming/src/main/java/
-* src/.DS_Store => libstreaming/src/main/resources/.DS_Store
-* src/net/.DS_Store => libstreaming/src/main/resources/net/.DS_Store
-* src/net/majorkernelpanic/.DS_Store => libstreaming/src/main/resources/net/majorkernelpanic/.DS_Store
 
 Next Steps:
 -----------
